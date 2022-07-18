@@ -14,7 +14,13 @@ public interface SubjectService {
 
     void deleteByID(Long id);
 
-    Subject getByName(String name);
+    List<Subject> getByName(String name);
 
-    Subject getBySem(int sem);
+    List<Subject> getBySem(int sem);
+
+//    List<Subject> getNameAndSort(String name, Sort sort);
+
+    int countSubject();
+
+    int countSubjectBySem(int sem);
 }

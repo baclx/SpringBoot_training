@@ -5,9 +5,7 @@ import com.example.springboot2.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -36,12 +34,30 @@ public class SubjectServiceImpl implements SubjectService{
     }
 
     @Override
-    public Subject getByName(String name) {
+    public List<Subject> getByName(String name) {
         return subjectRepository.findByName(name);
     }
 
     @Override
-    public Subject getBySem(int sem) {
+    public List<Subject> getBySem(int sem) {
         return subjectRepository.findAllBySem(sem);
     }
+
+    @Override
+    public int countSubject() {
+        return subjectRepository.countSubject();
+    }
+
+    @Override
+    public int countSubjectBySem(int sem) {
+        return subjectRepository.countSubjectBySem(sem);
+    }
+
+//    @Override
+//    public List<Subject> getNameAndSort(String name, Sort sort) {
+//        return subjectRepository.findByNameAndSort(name, Sort.by("name"));
+//    }
+
+
+
 }

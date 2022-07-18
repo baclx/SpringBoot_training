@@ -5,7 +5,6 @@ import com.example.springboot2.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,18 +63,37 @@ public class SubjectControllerApi {
     }
 
     @RequestMapping("/name={name}")
-    public Subject getSubjectByName(
+    public List<Subject> getSubjectByName(
             @PathVariable("name") String name
     ) {
         return subjectService.getByName(name);
     }
 
     @RequestMapping("/sem={sem}")
-    public Subject getSubjectBySem(
+    public List<Subject> getSubjectBySem(
             @PathVariable("sem") int sem
     ) {
         return subjectService.getBySem(sem);
     }
 
+//    @RequestMapping("/name={name}/sort={sort}")
+//    public List<Subject> getNameAndSort(
+//            @PathVariable("name") String name,
+//            @PathVariable("sort") Sort sort
+//    ) {
+//        return subjectService.getNameAndSort(name, sort);
+//    }
+
+    @RequestMapping("/countSubject")
+    public int countSubject() {
+        return subjectService.countSubject();
+    }
+
+    @RequestMapping("/countSubject/sem={sem}")
+    public int countSubjectBySem(
+            @PathVariable("sem") int sem
+    ) {
+        return subjectService.countSubjectBySem(sem);
+    }
 
 }
