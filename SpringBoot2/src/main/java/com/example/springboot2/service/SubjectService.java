@@ -18,9 +18,13 @@ public interface SubjectService {
 
     List<Subject> getBySem(int sem);
 
-//    List<Subject> getNameAndSort(String name, Sort sort);
-
     int countSubject();
 
     int countSubjectBySem(int sem);
+
+    List<Subject> findByAndSort(String name, String sort);
+
+    List<Subject> findByIdAndSortDesc();
+
+    List<Subject> findByNameSortDesc();
 }

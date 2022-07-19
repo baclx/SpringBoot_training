@@ -96,4 +96,21 @@ public class SubjectControllerApi {
         return subjectService.countSubjectBySem(sem);
     }
 
+    @RequestMapping("/find={name}")
+    public List<Subject> findByAndSort(
+            @PathVariable("name") String name,
+            @RequestParam(defaultValue = "ASC") String sort
+    ) {
+        return subjectService.findByAndSort(name, sort);
+    }
+
+    @RequestMapping("/findIdAndSortDesc")
+    public List<Subject> findIdAndSortDesc() {
+        return subjectService.findByIdAndSortDesc();
+    }
+
+    @RequestMapping("findNameAndSortDesc")
+    public List<Subject> findNameAndSortDesc() {
+        return subjectService.findByNameSortDesc();
+    }
 }

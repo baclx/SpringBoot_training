@@ -53,11 +53,19 @@ public class SubjectServiceImpl implements SubjectService{
         return subjectRepository.countSubjectBySem(sem);
     }
 
-//    @Override
-//    public List<Subject> getNameAndSort(String name, Sort sort) {
-//        return subjectRepository.findByNameAndSort(name, Sort.by("name"));
-//    }
+    @Override
+    public List<Subject> findByAndSort(String name, String sort) {
+        return subjectRepository.findByAndSort(name, sort);
+    }
 
+    @Override
+    public List<Subject> findByIdAndSortDesc() {
+        return subjectRepository.findAllByOrderByIdDesc();
+    }
 
+    @Override
+    public List<Subject> findByNameSortDesc() {
+        return subjectRepository.findAllByOrderByNameDesc();
+    }
 
 }
