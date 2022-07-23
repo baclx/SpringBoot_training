@@ -1,5 +1,6 @@
 package com.example.springboot2.service;
 
+import com.example.springboot2.dto.SubjectCountBySem;
 import com.example.springboot2.model.Subject;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public interface SubjectService {
     int countSubject();
 
     int countSubjectBySem(int sem);
+
+    List<SubjectCountBySem> countAllBySem();
 
     List<Subject> findByAndSort(String name, String sort);
 

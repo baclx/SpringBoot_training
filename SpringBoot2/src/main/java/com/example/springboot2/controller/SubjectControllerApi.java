@@ -1,5 +1,6 @@
 package com.example.springboot2.controller;
 
+import com.example.springboot2.dto.SubjectCountBySem;
 import com.example.springboot2.model.Subject;
 import com.example.springboot2.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,14 +77,6 @@ public class SubjectControllerApi {
         return subjectService.getBySem(sem);
     }
 
-//    @RequestMapping("/name={name}/sort={sort}")
-//    public List<Subject> getNameAndSort(
-//            @PathVariable("name") String name,
-//            @PathVariable("sort") Sort sort
-//    ) {
-//        return subjectService.getNameAndSort(name, sort);
-//    }
-
     @RequestMapping("/countSubject")
     public int countSubject() {
         return subjectService.countSubject();
@@ -96,10 +89,15 @@ public class SubjectControllerApi {
         return subjectService.countSubjectBySem(sem);
     }
 
+    @RequestMapping("/countSubjectAllByAllSem")
+    public List<SubjectCountBySem> countSubjectAllByAllSem() {
+        return subjectService.countAllBySem();
+    }
+
     @RequestMapping("/find={name}")
     public List<Subject> findByAndSort(
             @PathVariable("name") String name,
-            @RequestParam(defaultValue = "ASC") String sort
+            @RequestParam(defaultValue = "DESC") String sort
     ) {
         return subjectService.findByAndSort(name, sort);
     }

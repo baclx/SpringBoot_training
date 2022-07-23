@@ -1,5 +1,6 @@
 package com.example.springboot2.service;
 
+import com.example.springboot2.dto.SubjectCountBySem;
 import com.example.springboot2.model.Subject;
 import com.example.springboot2.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,11 @@ public class SubjectServiceImpl implements SubjectService{
     @Override
     public int countSubjectBySem(int sem) {
         return subjectRepository.countSubjectBySem(sem);
+    }
+
+    @Override
+    public List<SubjectCountBySem> countAllBySem() {
+        return subjectRepository.countBySem();
     }
 
     @Override
