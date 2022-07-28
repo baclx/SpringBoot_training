@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+<table id="table">
+    <thead>
+        <tr>
+<!--            <th>ID</th>-->
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+<!--            <th>Address</th>-->
+<!--            <th>Email</th>-->
+<!--            <th>Code</th>-->
+<!--            <th>Phone</th>-->
+<!--            <th>Class ID</th>-->
+        </tr>
+    </thead>
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add new user</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <input type="hidden" class="form-control" id="recipient-id">
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control" id="recipient-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Password:</label>
+                        <input type="text" class="form-control" id="recipient-password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="saveUser" type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $("#table").DataTable({
+            "ajax" : '../api/v1/listUsers',
+            // columns : [
+            //     {data: "name"},
+            //     {data: "address"},
+            //     {data: "email"},
+            //     {data: "code"},
+            //     {data: "phone"},
+            //     {data: "clazzByClassId"},
+            // ]
+
+            columns : [
+                {data: "name"},
+                {data: "email"},
+                {data: "password"},
+            ]
+        });
+    });
+
+    $("#saveUser").click(function () {
+        var name = $("#recipient-name").val();
+        var email = $("#recipient-email").val();
+        var password = $("#recipient-password").val();
+
+        var id = $("#recipient-id").val();
+
+        var data = {
+            "name" : name,
+            "email" : email,
+            "password" : password,
+            // "code" : code,
+            // "phone" : phone,
+            // "address" : address,
+            // "class_id" : class_id,
+        };
+
+        if (!id) {
+            $.ajax({
+                url: "/api/v1/users",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function () {
+                    $("#exampleModal").modal('hide');
+                },
+                error: function (err) {
+                    console.log(err)
+                }
+            })
+        } else {
+            //update student
+            $.ajax({
+                url: "/api/v1/users/" + id,
+                type: "PUT",
+                dataType: "json",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                    $("#exampleModal").modal('hide');
+                    $.notify("Access granted", "success");
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+    })
+</script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
