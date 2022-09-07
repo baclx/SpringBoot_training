@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1>[[${title}]]</h1>
+
+    <form th:action="@{../update}" method="post" th:object="${marks}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group row mt-4">
+            <label class="col-1 col-form-label">Student:</label>
+            <div class="col-11">
+                <select th:field="*{studentByIdSv}" class="form-control">
+                    <th:block th:each="student : ${studentLists}">
+                        <option th:text="${student.name}" th:value="${student.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-1 col-form-label">Subject:</label>
+            <div class="col-11">
+                <select th:field="*{subjectByIdSubject}" class="form-control">
+                    <th:block th:each="subject : ${subjectLists}">
+                        <option th:text="${subject.name}" th:value="${subject.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-1 col-form-label">Marks:</label>
+            <div class="col-11">
+                <input type="text" class="form-control" name="name" placeholder="Enter your mark" th:field="*{mark}">
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-1 col-form-label">Note:</label>
+            <div class="col-11">
+                <input type="text" class="form-control" name="name" placeholder="Enter your note" th:field="*{note}">
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <label class="col-1 col-form-label">Type:</label>
+            <div class="col-11">
+                <input type="text" class="form-control" name="name" placeholder="Enter your type" th:field="*{type}">
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="mt-4 btn btn-primary">Update</button>
+        </div>
+    </form>
+    <br>
+    <a th:href="@{../}">
+        Back
+    </a>
+</section>
+</body>
+</html>

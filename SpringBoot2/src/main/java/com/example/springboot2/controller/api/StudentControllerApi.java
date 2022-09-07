@@ -1,4 +1,4 @@
-package com.example.springboot2.controller;
+package com.example.springboot2.controller.api;
 
 import com.example.springboot2.model.Student;
 import com.example.springboot2.service.StudentService;
@@ -22,7 +22,7 @@ public class StudentControllerApi {
 
     @GetMapping("/{id}")
     public Optional<Student> getStudent(
-            @PathVariable int id
+            @PathVariable Long id
     ) {
         return studentService.getById(id);
     }
@@ -63,7 +63,7 @@ public class StudentControllerApi {
 
     @PutMapping("/{id}")
     public Student editStudent(
-            @PathVariable int id,
+            @PathVariable Long id,
             @RequestBody Student newStudent
     ) {
         return studentService.getById(id)
@@ -85,7 +85,7 @@ public class StudentControllerApi {
 
     @DeleteMapping("/{id}")
     public void deleteStudent(
-            @PathVariable int id
+            @PathVariable Long id
     ) {
         studentService.delete(id);
     }

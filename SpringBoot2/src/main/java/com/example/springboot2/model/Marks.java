@@ -1,15 +1,17 @@
 package com.example.springboot2.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 public class Marks {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
 //    @Basic
 //    @Column(name = "id_sv")
@@ -27,6 +29,10 @@ public class Marks {
     @Column(name = "note")
     private String note;
 
+    @Basic
+    @Column(name = "type")
+    private String type;
+
     @ManyToOne
     @JoinColumn(name = "id_sv", referencedColumnName = "id", nullable = false)
 //    @JsonBackReference
@@ -36,32 +42,6 @@ public class Marks {
     @JoinColumn(name = "id_subject", referencedColumnName = "id", nullable = false)
 //    @JsonBackReference
     private Subject subjectByIdSubject;
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Marks marks = (Marks) o;
-//
-//        if (id != marks.id) return false;
-//        if (idSv != marks.idSv) return false;
-//        if (idSubject != marks.idSubject) return false;
-//        if (mark != marks.mark) return false;
-//        if (note != null ? !note.equals(marks.note) : marks.note != null) return false;
-//
-//        return true;
-//    }
-
-//    @Override
-//    public int hashCode() {
-//        int result = id;
-//        result = 31 * result + idSv;
-//        result = 31 * result + idSubject;
-//        result = 31 * result + mark;
-//        result = 31 * result + (note != null ? note.hashCode() : 0);
-//        return result;
-//    }
 
     public Student getStudentByIdSv() {
         return studentByIdSv;

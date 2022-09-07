@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1>[[${title}]]</h1>
+
+    <div th:if="${msg}" class="alert alert-success text-center">
+        [[${msg}]]
+    </div>
+    <div th:if="${err}" class="alert alert-danger text-center">
+        [[${err}]]
+    </div>
+
+    <a class="btn btn-primary mb-2 mt-2" th:href="@{LT}">
+        Lý Thuyết
+    </a>
+
+    <a class="btn btn-primary ml-2 mb-2 mt-2" th:href="@{TH}">
+        Thực Hành
+    </a>
+
+</section>
+
+</body>
+</html>

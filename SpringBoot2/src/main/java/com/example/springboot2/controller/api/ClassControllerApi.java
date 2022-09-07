@@ -1,4 +1,4 @@
-package com.example.springboot2.controller;
+package com.example.springboot2.controller.api;
 
 import com.example.springboot2.model.Clazz;
 import com.example.springboot2.service.ClassService;
@@ -15,7 +15,7 @@ public class ClassControllerApi {
 
     @GetMapping
     public List<?> listAll() {
-        return classService.listAll();
+        return classService.getAll();
     }
 
     @PostMapping
@@ -27,8 +27,8 @@ public class ClassControllerApi {
 
     @DeleteMapping("/{id}")
     public void deleteClass(
-            @PathVariable("id") int id
+            @PathVariable("id") Long id
     ) {
-        classService.delete(id);
+        classService.deleteByID(id);
     }
 }

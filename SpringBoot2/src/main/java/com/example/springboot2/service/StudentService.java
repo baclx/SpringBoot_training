@@ -10,9 +10,9 @@ public interface StudentService {
 
     Student save (Student student);
 
-    void delete (int id);
+    void delete (Long id);
 
-    Optional<Student> getById (int id);
+    Optional<Student> getById (Long id);
 
     Optional<Student> getByCode (String code);
 

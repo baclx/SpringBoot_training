@@ -1,9 +1,11 @@
 package com.example.springboot2.repository;
 
 import com.example.springboot2.dto.SubjectCountBySem;
+import com.example.springboot2.model.Clazz;
 import com.example.springboot2.model.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,4 +34,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Long> {
     // query dto
     @Query("select new com.example.springboot2.dto.SubjectCountBySem(s.sem, COUNT(s.name)) from Subject s group by s.sem")
     List<SubjectCountBySem> countBySem();
+
+    @Query("select s from Subject s where concat(s.name, s.description) like %?1%")
+    List<Subject> findAll(String keyword);
 }

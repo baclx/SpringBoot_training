@@ -1,4 +1,4 @@
-package com.example.springboot2.controller;
+package com.example.springboot2.controller.api;
 
 import com.example.springboot2.dto.SubjectCountBySem;
 import com.example.springboot2.model.Subject;
@@ -16,10 +16,10 @@ public class SubjectControllerApi {
     @Autowired
     SubjectService subjectService;
 
-    @GetMapping
-    public List<Subject> listAll() {
-        return subjectService.getAllSubject();
-    }
+//    @GetMapping
+//    public List<Subject> listAll() {
+//        return subjectService.getAllSubject();
+//    }
 
     @PostMapping
     public Subject addSubject(

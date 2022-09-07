@@ -1,4 +1,4 @@
-package com.example.springboot2.controller;
+package com.example.springboot2.controller.api;
 
 import com.example.springboot2.model.Marks;
 import com.example.springboot2.service.MarksService;

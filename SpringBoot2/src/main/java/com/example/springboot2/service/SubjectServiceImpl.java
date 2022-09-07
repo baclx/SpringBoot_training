@@ -16,7 +16,10 @@ public class SubjectServiceImpl implements SubjectService{
     SubjectRepository subjectRepository;
 
     @Override
-    public List<Subject> getAllSubject() {
+    public List<Subject> getAllSubject(String keyword) {
+        if (keyword != null) {
+            return subjectRepository.findAll(keyword);
+        }
         return subjectRepository.findAll();
     }
 

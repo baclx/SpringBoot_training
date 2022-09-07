@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/index}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]]</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1>[[${title}]]</h1>
+
+    <a class="btn btn-primary mb-2 mt-2" th:href="@{add}">
+        Add
+    </a>
+
+    <form class="float-right d-flex mt-2" th:action="@{/admin/subject/}">
+        <label class="control-label mr-2 d-flex align-items-center">Search: </label>
+        <input class="border border-none form-control mb-2" name="keyword" th:value="${keyword}">
+    </form>
+
+    <div th:if="${msg}" class="alert alert-success text-center">
+        [[${msg}]]
+    </div>
+    <div th:if="${err}" class="alert alert-danger text-center">
+        [[${err}]]
+    </div>
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Sem</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <th:block th:each="subject : ${subjectLists}">
+            <tr>
+                <td>[[${subject.id}]]</td>
+                <td>[[${subject.name}]]</td>
+                <td>[[${subject.description}]]</td>
+                <td>[[${subject.duration}]]</td>
+                <td>[[${subject.sem}]]</td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{'edit/' + ${subject.id}}">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" th:href="@{'delete/' + ${subject.id}}">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</section>
+</body>
+</html>
